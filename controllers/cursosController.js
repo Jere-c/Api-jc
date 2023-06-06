@@ -80,10 +80,10 @@ exports.addCurso = async (req, res) => {
 
 exports.updateCurso = async (req, res) => {
     const cursoData = req.body
-    const cursoId = req.params.id
+    const CursoId = req.params.id
 
     const curso = {
-        cursoId,
+        CursoId,
         ...cursoData,
     }
 
@@ -94,12 +94,12 @@ exports.updateCurso = async (req, res) => {
         if (ListaActualizada < 1) {
             res.status(404).json({
                 success: false,
-                message: `Error al actualizar estudiante.`
+                message: `Error al actualizar curso.`
             })
         }
         res.status(200).json({
             success: true,
-            message: `Estudiante actualizado con exito.`,
+            message: `Curso actualizado con exito.`,
             ListaActualizada
         })
 

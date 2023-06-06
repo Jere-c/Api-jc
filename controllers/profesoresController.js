@@ -67,10 +67,10 @@ exports.addProfesor = async (req, res) => {
 
 exports.updateProfesor = async (req, res) => {
     const profesorData = req.body
-    const id = req.params.id
+    const ProfesorId = req.params.id
 
     const profesor = {
-        id,
+        ProfesorId,
         ...profesorData
     }
 

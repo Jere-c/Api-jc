@@ -66,11 +66,11 @@ exports.addStudent = async (req, res) => {
 }
 
 exports.updateStudent = async (req, res) => {
-    const Estudianteid = req.params.id
+    const EstudianteId = req.params.id
     const studentData = req.body
 
     const student = {
-        Estudianteid,
+        EstudianteId,
         ...studentData
     }
 
@@ -79,7 +79,7 @@ exports.updateStudent = async (req, res) => {
     try {
         const ListaActualizada = await estudiantesModel.updateStudent(student);
 
-        if (ListaActualizada < 1) {
+        if (!ListaActualizada) {
             res.status(404).json({
                 success: false,
                 message: `Error al actualizar estudiante.`
