@@ -29,3 +29,8 @@ exports.deleteCursorById = async(CursoId)=>{
     const [rows, fields] = await db.execute('DELETE from cursos WHERE CursoId = ?', [CursoId])
     return rows
 }
+
+exports.addEstudianteAUnCurso = async (estudiante) => {
+    const [rows, fields] = await db.execute('INSERT INTO `estudiantes_cursos` VALUE ( ?, ? )', [estudiante.estudiante_id, estudiante.id ]);
+    return rows;
+}

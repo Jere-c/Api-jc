@@ -136,3 +136,34 @@ exports.deleteCursoById = async (req, res) => {
         })
     }
 }
+
+exports.addEstudianteAUnCurso = async (req, res) => {
+    const id = req.params.id;
+    const cursoActualizado = req.body;
+
+    const curso = {
+        id,
+        ...cursoActualizado
+    }
+    console.log(curso)
+    try {
+        const listaActualizada = await cursosModel.addEstudianteAUnCurso(curso)
+        if (listaActualizada < 1) {
+            res.status(404).json({
+                success: false,
+                message: "datos no agragados"
+            })
+         }
+        res.status(200).json({
+            success: true,
+            message: "datos agregados",
+        curso
+        })
+     }
+     catch(error) {
+        res.status(500).json({
+            success: false,
+            message: "No anda"
+        })
+        }
+    }
