@@ -57,6 +57,7 @@ exports.addProfesor = async (req, res) => {
             message: `Profesor insertado con exito.`
         })
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             message: `Error al obtener los datos`,

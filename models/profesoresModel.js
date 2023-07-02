@@ -13,7 +13,7 @@ exports.getProfesorById = async(ProfesorId)=>{
 }
 
 exports.addProfesor = async(profesor)=>{
-    const [rows, fields] = await db.execute('INSERT INTO profesores (Nombre, Especialidad, Email) VALUES (?,?,?)', [profesor.Nombre , profesor.Especialidad, profesor.Email])
+    const [rows, fields] = await db.execute('INSERT INTO profesores (Nombre, Especialidad, Email, Contraseña) VALUES (?,?,?,?)', [profesor.Nombre , profesor.Especialidad, profesor.Email, profesor.Contraseña])
     console.log(rows);
     return rows;
 }
