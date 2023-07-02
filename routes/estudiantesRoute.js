@@ -15,6 +15,7 @@ router.post('/',[
 ], estudiantesController.addStudent);
 router.put('/:id', estudiantesController.updateStudent);
 router.delete('/:id', estudiantesController.deleteStudentById);
+router.get('/:id/cursos',estudiantesController.getCursosFromEstudiantes)
 
 router.get('/buscar', (req,res) => {
     const searchTerm = req.params.busqueda

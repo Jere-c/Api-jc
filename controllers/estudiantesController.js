@@ -126,3 +126,28 @@ exports.deleteStudentById = async (req, res) => {
         })
     }
 }
+
+exports.getCursosFromEstudiantes = async (req, res) => {
+    const EstudianteId = req.params.id;
+    try{
+        const student = await estudiantesModel.getCursosFromEstudiante(EstudianteId)
+
+        if(student.length < 1){
+            res.status(404).json({
+                success: false,
+                message: `No existe tal estudiante con id ${EstudianteId}`
+            })
+        }
+        res.status(200).json({
+            success:true,
+            student
+        })
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success:false,
+            message:'Error al obtener los datos'
+        })
+    }
+}

@@ -138,11 +138,11 @@ exports.deleteCursoById = async (req, res) => {
 }
 
 exports.addEstudianteAUnCurso = async (req, res) => {
-    const id = req.params.id;
+    const id_curso = req.params.id;
     const cursoActualizado = req.body;
 
     const curso = {
-        id,
+        id_curso,
         ...cursoActualizado
     }
     console.log(curso)
@@ -151,19 +151,45 @@ exports.addEstudianteAUnCurso = async (req, res) => {
         if (listaActualizada < 1) {
             res.status(404).json({
                 success: false,
-                message: "datos no agragados"
+                message: "No se agregaron los datos"
             })
-         }
+        }
         res.status(200).json({
             success: true,
-            message: "datos agregados",
-        curso
+            message: "Estudiante agregado correctamente",
+            curso
         })
-     }
-     catch(error) {
+    }
+    catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
-            message: "No anda"
+            message: "Error"
         })
-        }
     }
+}
+
+exports.getEstudiantesFromCursos = async (req,res) => {
+    const CursoId = req.params.id;
+    try {
+        const curso = await cursosModel.getEstudiantesFromCursos(CursoId)
+  
+        if(curso.length < 1){
+            res.status(404).json({
+                success: false,
+                message: `no funca`
+            })
+        }
+        res.status(200).json({
+            success:true,
+            curso
+        })
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success:false,
+            message:'Error al obtener los datos'
+        })
+    }
+}

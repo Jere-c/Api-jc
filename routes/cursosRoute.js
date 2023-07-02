@@ -14,6 +14,7 @@ router3.post('/',[
 router3.put('/:id', cursosController.updateCurso)
 router3.delete('/:id', cursosController.deleteCursoById)
 router3.post('/:id/estudiantes', cursosController.addEstudianteAUnCurso);
+router3.get('/:id/estudiantes', cursosController.getEstudiantesFromCursos)
 
 
 module.exports = router3;
