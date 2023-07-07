@@ -13,7 +13,12 @@ router.post('/',[
     check('Grado','El Grado es obligatorio').not().isEmpty(),
     validarCampos
 ], estudiantesController.addStudent);
-router.put('/:id', estudiantesController.updateStudent);
+router.put('/:id',[
+    check('Nombre','El Nombre es obligatorio').not().isEmpty(),
+    check('Edad','La Edad es obligatirio').not().isEmpty(),
+    check('Grado','El Grado es obligatorio').not().isEmpty(),
+    validarCampos
+], estudiantesController.updateStudent);
 router.delete('/:id', estudiantesController.deleteStudentById);
 router.get('/:id/cursos',estudiantesController.getCursosFromEstudiantes)
 

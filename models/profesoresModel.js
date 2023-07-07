@@ -1,4 +1,12 @@
 const db = require('./../config/db')
+const hashlib = require('crypto')
+
+const hashPassword = (Contraseña) => {
+    const hash = hashlib.createHash('sha256');
+    hash.update(Contraseña);
+    return hash.digest('hex');
+}
+
 
 exports.getProfesores = async ()=>{
     const [rows, fields] = await db.execute('SELECT * FROM profesores');
@@ -12,16 +20,17 @@ exports.getProfesorById = async(ProfesorId)=>{
     return rows;
 }
 
+
 exports.addProfesor = async(profesor)=>{
-    const [rows, fields] = await db.execute('INSERT INTO profesores (Nombre, Especialidad, Email, Contraseña) VALUES (?,?,?,?)', [profesor.Nombre , profesor.Especialidad, profesor.Email, profesor.Contraseña])
+    const hashPass = hashPassword(profesor.Contraseña)
+    const [rows, fields] = await db.execute('INSERT INTO profesores (Nombre, Especialidad, Email, Contraseña) VALUES (?,?,?,?)', [profesor.Nombre , profesor.Especialidad, profesor.Email, hashPass])
     console.log(rows);
     return rows;
 }
 
 exports.updateProfesor = async(profesor)=>{
-    console.log('Modelo a seguir')
-    console.log(profesor);
-    const [rows, fields] = await db.execute('UPDATE profesores SET Nombre = ?, Especialidad = ?, Email = ? WHERE ProfesorId = ?', [profesor.Nombre, profesor.Especialidad, profesor.Email, profesor.ProfesorId])
+    const hashPass = hashPassword(profesor.Contraseña)
+    const [rows, fields] = await db.execute('UPDATE profesores SET Nombre = ?, Especialidad = ?, Email = ?, Contraseña=? WHERE ProfesorId = ?', [profesor.Nombre, profesor.Especialidad, profesor.Email,hashPass, profesor.ProfesorId])
     return rows
 }
 

@@ -11,7 +11,11 @@ router3.post('/',[
     check('Descripcion','La Descripción es obligatoria').not().isEmpty(),
     validarCampos
 ], cursosController.addCurso)
-router3.put('/:id', cursosController.updateCurso)
+router3.put('/:id',[
+    check('Nombre','El Nombre es obligatorio').not().isEmpty(),
+    check('Descripcion','La Descripción es obligatoria').not().isEmpty(),
+    validarCampos
+], cursosController.updateCurso)
 router3.delete('/:id', cursosController.deleteCursoById)
 router3.post('/:id/estudiantes', cursosController.addEstudianteAUnCurso);
 router3.get('/:id/estudiantes', cursosController.getEstudiantesFromCursos)
